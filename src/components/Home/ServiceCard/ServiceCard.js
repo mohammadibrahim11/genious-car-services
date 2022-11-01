@@ -1,8 +1,9 @@
 import React from "react";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
-  const { img, title, price } = service;
+  const { _id, img, title, price } = service;
   return (
     <div>
       <div className="card border-dark-400 border w-96 bg-base-100 hover:shadow-xl">
@@ -17,7 +18,11 @@ const ServiceCard = ({ service }) => {
            <div>
            <ArrowRightIcon className="h-6 w-6 text-orange-500" />
            </div>
+         
           </div>
+          <div>
+              <Link to={`/checkout/${_id}`}><button className="btn btn-primary">buy now</button></Link>
+           </div>
         </div>
       </div>
     </div>
