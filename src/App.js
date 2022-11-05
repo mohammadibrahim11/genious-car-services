@@ -26,6 +26,11 @@ function App() {
           element:<SignIn></SignIn>
         },
         {
+          path:'/checkout/',
+          element:<Checkout></Checkout>,
+          // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+        },
+        {
           path:'/checkout/:id',
           element:<Checkout></Checkout>,
           loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
@@ -42,7 +47,7 @@ function App() {
 
   ]);
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className="">
       <RouterProvider router={router}></RouterProvider>
     </div>
   );

@@ -1,124 +1,83 @@
-import React, { useContext } from "react";
-import { useLoaderData } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthProvider";
+import React from "react";
+// { useContext } from "react";
+// import { useLoaderData } from "react-router-dom";
+// import { AuthContext } from "../../Context/AuthProvider";
 
 const Checkout = () => {
-  const { title,_id,price } = useLoaderData();
-  const {user} = useContext(AuthContext);
-  console.log(title);
+  //   const { title,_id,price } = useLoaderData();
+  //   const {user} = useContext(AuthContext);
+  //   console.log(title);
 
-  const handlePlaceOrder=(event)=>{
-  event.preventDefault();
-  const form = event.target;
-  const name = `${form.firstName.value} ${form.lastName.value}`;
- const phone = form.name.value;
- const email = user?.email || 'unregistered';
+  //   const handlePlaceOrder=(event)=>{
+  //   event.preventDefault();
+  //   const form = event.target;
+  //   const name = `${form.firstName.value} ${form.lastName.value}`;
+  //  const phone = form.phone.value;
+  //  const email = user?.email || 'unregistered';
 
- const order={
+  //  const order={
 
-     serviceId: _id ,
-    serviceName:title,
-    servicePrice:price,
-    clientName:name,
-    clientPhone:phone,
-    email:email,
+  //      serviceId: _id ,
+  //     serviceName:title,
+  //     servicePrice:price,
+  //     clientName:name,
+  //     clientPhone:phone,
+  //     email:email,
 
- }
-//  if(phone.length > 10){
-//     alert("phone should be 10 charecters")
-//  }
-  
- fetch(`http://localhost:5000/orders`,{
-    method:'POST',
-    headers:{
-        'content-type':'application/json'
-    },
-    body:JSON.stringify(order)
- })
- .then(res => res.json())
- .then(data => {console.log(data)
-if(data.acknowledged){
-    alert('order places')
-    form.reset();
-}})
- .catch(error => console.error(error));
+  //  }
+  //  if(phone.length > 10){
+  //     alert("phone should be 10 charecters")
+  //  }
 
-  }
+  //  fetch(`http://localhost:5000/orders`,{
+  //     method:'POST',
+  //     headers:{
+  //         'content-type':'application/json'
+  //     },
+  //     body:JSON.stringify(order)
+  //  })
+  //  .then(res => res.json())
+  //  .then(data => {console.log(data)
+  // if(data.acknowledged){
+  //     alert('order places')
+  //     form.reset();
+  // }})
+  //  .catch(error => console.error(error));
 
+  //   }
 
   return (
-    <section className="p-6 dark:dark:bg-gray-800 dark:dark:text-gray-50">
-      <form onSubmit={handlePlaceOrder}
-        novalidate=""
-        action=""
-        className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid"
-      >
-        <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:dark:bg-gray-900">
-          <div className="space-y-2 col-span-full lg:col-span-1">
-            <p className="font-medium">checkout</p>
-            <p className="text-xs">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci
-              fuga autem eum!
-            </p>
-          </div>
-          <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
-            <div className="col-span-full sm:col-span-3">
-              <label for="firstName" className="text-sm">
-                First name
-              </label>
-              <input
-                id="firstName"
-                name="firstName"
-                type="text"
-                placeholder="First name"
-                className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:dark:border-gray-700 dark:dark:text-gray-900"
-              />
-            </div>
-            <div className="col-span-full sm:col-span-3">
-              <label for="lastName" className="text-sm">
-                Last name
-              </label>
-              <input
-                id="lastName"
-                type="text"
-                placeholder="Last name"
-                name="lastName"
-                className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:dark:border-gray-700 dark:dark:text-gray-900"
-              />
-            </div>
+  <div className="bg-white">
 
-            <div className="col-span-full">
-              <label for="address" className="text-sm">
-               Phone
-              </label>
-              <input
-                id="address"
-                type="text"
-                placeholder="enter your phone"
-                name="phone"
-                className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:dark:border-gray-700 dark:dark:text-gray-900"
-              />
-            </div>
-            <div className="col-span-full sm:col-span-3">
-              <label for="email" className="text-sm">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder="Email"
-                name="email"
-                defaultValue={user?.email} 
-                readOnly
-                className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:dark:border-gray-700 dark:dark:text-gray-900"
-              />
-            </div>
-          </div>
+    <div className="bg-white">
+    <h2 className="text-4xl mt-5 font-bold text-center">Checkout</h2>
+    </div>
+    <form className="bg-gray-100 rounded  container w-1/2 mx-auto pt-5 mt-8 mb-8 ">
+     
+    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4  w-11/12 mx-auto '>
+                    <input name="firstName" type="text" placeholder="First Name" className=" p-2 border rounded  bg-white w-full " />
+                    <input name="lastName" type="text" placeholder="Last Name" className="p-2 border rounded  bg-white w-full " />
+                    <input name="phone" type="text" placeholder="Your Phone" className=" bg-white  w-full  p-2 border rounded" required />
+                    <input name="email" type="text" placeholder="Your email" className=" p-2 bg-white w-full  border rounded" readOnly />
+
+                 
+      
+                </div>
+
+             
+             <div className="w-11/12 mx-auto my-4 grid grid-cols-1">
+             <textarea name="message" className="p-2 border rounded  bg-white textarea-bordered w-full h-24 " placeholder="your message" id="" required ></textarea>
+          
+
         
-        </fieldset>
-        <button className="btn btn-primary">place your order</button>
-      </form>
-    </section>
+   
+                <input className="mx-auto btn btn-primary my-4 " type="submit" value="place your order" />
+             </div>
+           
+              
+    </form>
+  </div>
+    
   );
 };
 

@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  
+}
+
+#root{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
 }
 
 .App-logo {
