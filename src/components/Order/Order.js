@@ -3,18 +3,18 @@ import React, {  useEffect, useState } from 'react';
 
 
 const Order = ({order,handleDelete,handleUpdate}) => {
-    const {serviceName,email,servicePrice,clientName,_id,serviceId,status}= order;
+    const {title,email,price,name,_id,contact,status,service}= order;
     console.log(order);
 
     const [orderService,setOrderService] = useState({});
 
-
+// ekhane services er img load deya hoise.service er id diye oi service ke khuje ber korte hobe
     useEffect(()=>{
-      fetch(`http://localhost:5000/services/${serviceId}`)
+      fetch(`http://localhost:5000/services/${service}`)
       .then(res =>res.json())
       .then(data => setOrderService(data))
       
-    },[serviceId]);
+    },[service]);
 
 
     return (
@@ -24,10 +24,16 @@ const Order = ({order,handleDelete,handleUpdate}) => {
         <tbody>
           <tr>
             <th><button className='btn btn-ghost' onClick={()=>handleDelete(_id)}>x</button></th>
-            <td>{serviceName}</td>
+            {
+              orderService?.img &&
+              <img className='h-12 w-12 border rounded' src={orderService?.img} alt="" srcset="" />
+              
+            }
+            <td>{title}</td>
             <td>{email}</td>
-            <td>{servicePrice}</td>
-            <td>{clientName}</td>
+            <td>{price}</td>
+            <td>{name}</td>
+            <td>{contact}</td>
       <td><button className='btn btn-primary' onClick={()=>handleUpdate(_id)}>{status ? status : 'pending'}</button></td>
           </tr>
         </tbody>

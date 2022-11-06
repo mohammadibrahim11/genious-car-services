@@ -8,7 +8,8 @@ import {
   signOut,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
-import { current } from "daisyui/src/colors";
+// import { current } from "daisyui/src/colors";
+
 
 export const AuthContext = createContext();
 const auth = getAuth(app);

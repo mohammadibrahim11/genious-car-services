@@ -5,19 +5,26 @@ import Order from "../Order/Order";
 const Orders = () => {
   const { user } = useContext(AuthContext);
 
+  // setorders declare for update order after deleting and updating any order from order page 
   const [orders, setOrders] = useState([]);
 
-  const [loading, setLoading] = useState(true);
+// setLoading declare for refressh your page 
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/orders?email=${user?.email}`,{
-      headers:{
-        authorization:`Bearer ${localStorage.getItem('genius-token')}`
-      }
-    })
+    fetch(`http://localhost:5000/orders?email=${user.email}`)
       .then((res) => res.json())
-      .then((data) => setOrders(data));
+      .then((data) => {
+        setOrders(data);
+        console.log(data);
+      });
   }, [user?.email]);
+
+
+
+  // delete korte hole age method bolte hobe.
+  // use window.confirm
+  // orders er modhe  id dite hobe je id ta delete korte chai 
 
   const handleDelete = (_id) => {
     const proceed = window.confirm("are you sure you want to delete");
@@ -28,15 +35,25 @@ const Orders = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+        
+
           if (data.deletedCount > 0) {
             alert("deleted successfully");
+//  delete korar por je order thakbe tader ke filter kore baki order gulu dekhave.
             const remaining = orders.filter((odr) => odr._id !== _id);
-            setOrders(remaining);
-            setLoading(false);
-          }
+            setOrders(remaining);}
+            
+          // }
         });
     }
   };
+
+
+  // fetch
+  // method
+  // headers
+  // body
+  // 
 
   const handleUpdate = (_id) => {
     fetch(`http://localhost:5000/orders/${_id}`, {
@@ -47,43 +64,43 @@ const Orders = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if(data.modifiedCount > 0){
-          const remaining = orders.filter(odr => odr._id !== _id)
-          const changing = orders.find (odr => odr._id === _id);
-          changing.status= 'approved'
+        if (data.modifiedCount > 0) {
+    //  jeta  change kortecina seita bade bakigula ke filter korbo
+          const remaining = orders.filter((odr) => odr._id !== _id);
+
+          const changing = orders.find((odr) => odr._id === _id);
+
+          changing.status = "approved";
+
+          // neworders hobe age ja ase sob and new je update korci oita soho 
+
           const newOrders = [...remaining, changing];
-          setOrders(newOrders)
+          setOrders(newOrders);
         }
       });
   };
 
   return (
+    <div>
+      <h1 className="text-4xl">you have {orders.length} orders</h1>
+
+      <div>
+        <div className="overflow-x-auto w-full">
+          <table>
+            <tbody>
+      
+
+              {
+                orders.map(order => <Order key={order._id} order={order} handleDelete={handleDelete}
+                  handleUpdate={handleUpdate}></Order>)
+              }
+            </tbody>
+          </table>
+        </div>
+      </div> 
+    </div>
     // <div className="overflow-x-auto w-full">
-    <table className="table w-full">
-      <thead>
-        <tr>
-          <th>
-            <label>
-              <input type="checkbox" className="checkbox" />
-            </label>
-          </th>
-          <th>Name</th>
-          <th>Job</th>
-          <th>Favorite Color</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {orders.map((order) => (
-          <Order
-            key={order._id}
-            order={order}
-            handleDelete={handleDelete}
-            handleUpdate={handleUpdate}
-          ></Order>
-        ))}
-      </tbody>
-    </table>
+
     // {/* </div> */}
   );
 };

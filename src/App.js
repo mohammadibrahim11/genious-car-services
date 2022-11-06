@@ -4,6 +4,7 @@ import Checkout from "./components/CheckOut/Checkout";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Orders from "./components/Orders/Orders";
+import Privateroute from "./components/Privateroute/Privateroute";
 import Root from "./components/Root/Root";
 import SignIn from "./components/SignIn/SignIn";
 
@@ -25,11 +26,13 @@ function App() {
           path:'/signin',
           element:<SignIn></SignIn>
         },
-        {
-          path:'/checkout/',
-          element:<Checkout></Checkout>,
-          // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
-        },
+
+        // {
+        //   path:'/checkout/',
+        //   element:<Checkout></Checkout>,
+        //   // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+        // },
+
         {
           path:'/checkout/:id',
           element:<Checkout></Checkout>,
@@ -37,7 +40,7 @@ function App() {
         },
         {
           path:'/orders',
-          element:<Orders></Orders>,
+          element:<Privateroute><Orders></Orders></Privateroute>,
         
         },
   

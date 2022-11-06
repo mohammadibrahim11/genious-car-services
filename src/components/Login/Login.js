@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
-import { json, Link } from "react-router-dom";
+import { json, Link, useLocation, useNavigate } from "react-router-dom";
 import { FaFacebook, FaGoogle, FaGithub } from "react-icons/fa";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || '/orders'
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -18,6 +22,9 @@ const Login = () => {
 
         const currentUser = {user: user.email};
         console.log(currentUser);
+        navigate(from,{replace:true});
+        form.reset();
+        
         // get jwt token
         fetch('http://localhost:5000/orders/jwt',{
           method:'POST',

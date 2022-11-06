@@ -31,7 +31,7 @@ const Header = () => {
       </li>
       <li>
        
-        <Link to="/"> Blog </Link>
+        <Link to="/orders"> Orders </Link>
       </li>
       <li>
        
@@ -41,6 +41,8 @@ const Header = () => {
         <button
             onClick={handleLogOut}> sign out 
         </button>
+       
+      
             :
           <button>
              <Link to='/login' >log in </Link> 
